@@ -15,10 +15,7 @@ namespace ASM_1618_Mark3
         public BookingScreen()
         {
             InitializeComponent();
-            Room.RoomTypes().ForEach(element =>
-            {
-                roomTypeComboBox.Items.Add(element);
-            });
+            ClearInput();
             timer1.Start();
         }
         protected override void OnClosed(EventArgs e)
@@ -59,6 +56,14 @@ namespace ASM_1618_Mark3
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             this.comfirmPopup.Visible = true;
+            confirmationNameValue.Text = customerName.Text;
+            confirmationAgeValue.Text = customerAge.Text;
+            confirmationAddressValue.Text = customerAddress.Text;
+            confirmationPhoneValue.Text = customerPhoneNumber.Text;
+            roomTypeConfirmation.Text = roomTypeComboBox.Text;
+            roomNumConfirmation.Text= roomNumberComboBox.Text;
+            durationConfirmation.Text = durationTextBox.Text;
+            priceConfirmation.Text = $"Price {Room.GetPricePerDay(roomTypeComboBox.Text) * Convert.ToInt32(durationTextBox.Text)}$";
         }
 
         private void guna2TextBox4_TextChanged(object sender, EventArgs e)
@@ -75,13 +80,15 @@ namespace ASM_1618_Mark3
         {
             List<int> availableRooms = Room.FindAvailableRoom(roomTypeComboBox.Text);
             roomNumberComboBox.Items.Clear();
-            if (availableRooms.Count <= 1)
+            pricePerDayBox.Text = Room.GetPricePerDay(roomTypeComboBox.Text).ToString();
+
+            if (availableRooms.Count <= 0)
             {
                 MessageBox.Show("Sorry, this type of room has out of room, please choose another type!");
             }
             else
             {
-                for (int i = 1; i < availableRooms.Count; i++)
+                for (int i = 0; i < availableRooms.Count; i++)
                 {
                     roomNumberComboBox.Items.Add(availableRooms[i]);
                 }
@@ -100,9 +107,12 @@ namespace ASM_1618_Mark3
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (customerName.Text != "" && customerAge.Text != "" && customerAddress.Text != "" && customerIdCard.Text != "" && roomTypeComboBox.Text != "" && roomNumberComboBox.Text != "" && durationTextBox.Text != "")
+            if (customerName.Text != "" && customerAge.Text != "" && customerAddress.Text != "" && customerPhoneNumber.Text != "" && roomTypeComboBox.Text != "" && roomNumberComboBox.Text != "" && durationTextBox.Text != "")
             {
                 bookButton.Visible = true;
+            } else
+            {
+                bookButton.Visible = false;
             }
         }
 
@@ -123,7 +133,11 @@ namespace ASM_1618_Mark3
 
         private void guna2Button2_Click_1(object sender, EventArgs e)
         {
-            App.customers.Add(new Customer(customerName.Text, customerIdCard.Text, customerAge.Text, customerAddress.Text, roomTypeComboBox.Text, Convert.ToInt32(roomNumberComboBox.Text), Convert.ToInt32(durationTextBox.Text)));
+            App.customers.Add(new Customer(customerName.Text, customerPhoneNumber.Text, customerAge.Text, customerAddress.Text, roomTypeComboBox.Text, Convert.ToInt32(roomNumberComboBox.Text), Convert.ToInt32(durationTextBox.Text)));
+            ClearInput();
+            comfirmPopup.Visible = false;
+            MessageBox.Show("Your room has been booked, thank you for choosing our service!");
+            App.WriteDataToMemory();
         }
 
         private void guna2Button1_Click_1(object sender, EventArgs e)
@@ -135,14 +149,60 @@ namespace ASM_1618_Mark3
         {
             if (App.CheckPassword(usernameTextBox.Text, passwordTextBox.Text))
             {
-                // this.managerConsole.Show();
+                usernameTextBox.Text = "";
+                passwordTextBox.Text = "";
                 App.managerConsole.Show();
                 this.Hide();
             }
             else
             {
-                MessageBox.Show("Wrong Password!");
+                MessageBox.Show("Wrong usenamr or password!");
             }
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label9_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pricePerDayBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BookingScreen_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void ClearInput()
+        {
+            customerName.Clear();
+            customerPhoneNumber.Clear();
+            customerAge.Clear();
+            customerAddress.Clear();
+            pricePerDayBox.Clear();
+            roomTypeComboBox.Items.Clear();
+            Room.RoomTypes().ForEach(element =>
+            {
+                roomTypeComboBox.Items.Add(element);
+            });
+            roomNumberComboBox.Items.Clear();
+            durationTextBox.Clear();
         }
     }
 }

@@ -38,6 +38,7 @@
             // 
             this.guna2ProgressBar1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
             this.guna2ProgressBar1.Location = new System.Drawing.Point(12, 499);
+            this.guna2ProgressBar1.Maximum = 200;
             this.guna2ProgressBar1.Name = "guna2ProgressBar1";
             this.guna2ProgressBar1.ProgressColor = System.Drawing.Color.DimGray;
             this.guna2ProgressBar1.ProgressColor2 = System.Drawing.Color.Black;
@@ -65,10 +66,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(584, 541);
+            this.ControlBox = false;
             this.Controls.Add(this.guna2PictureBox1);
             this.Controls.Add(this.guna2ProgressBar1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SplashScreen";
-            this.Text = "SplashScreen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.SplashScreen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.ResumeLayout(false);
