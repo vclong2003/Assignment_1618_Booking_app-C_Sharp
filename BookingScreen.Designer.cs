@@ -945,6 +945,7 @@
         private Guna.UI2.WinForms.Guna2TextBox pricePerDayBox;
         private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        // by VCL
     }
 }
 
