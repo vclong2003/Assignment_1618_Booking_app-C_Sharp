@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ASM_1618_Mark3
@@ -44,6 +38,7 @@ namespace ASM_1618_Mark3
         {
             searchMode = "";
             ClearPanel();
+            roomPanel.Visible = false;
             allCustmerPanel.Visible = true;
             currentCustomerList = new List<Customer>();
             currentCustomerList = App.customers;
@@ -100,6 +95,7 @@ namespace ASM_1618_Mark3
         private void searchByNameBtn_Click(object sender, EventArgs e)
         {
             ClearPanel();
+            roomPanel.Visible = false;
             allCustmerPanel.Visible = true;
             searchMode = "name";
             searchInput.Text = "";
@@ -162,6 +158,7 @@ namespace ASM_1618_Mark3
         private void searchByPhoneBtn_Click(object sender, EventArgs e)
         {
             ClearPanel();
+            roomPanel.Visible = false;
             allCustmerPanel.Visible = true;
             searchMode = "phoneNumber";
             searchInput.Text = "";
@@ -173,6 +170,7 @@ namespace ASM_1618_Mark3
         private void guna2Button4_Click(object sender, EventArgs e)
         {
             roomTypeComboBox.Items.Clear();
+            roomPanel.Visible = false;
             allCustmerPanel.Visible = true;
             Room.RoomTypes().ForEach(element =>
             {
@@ -197,7 +195,6 @@ namespace ASM_1618_Mark3
                 editBtn.Visible = false;
             }
         }
-
         private void editBtn_Click(object sender, EventArgs e)
         {
             int index = listBoxCustomer.SelectedIndex;
@@ -207,12 +204,10 @@ namespace ASM_1618_Mark3
             addressEditingTextBox.Text = currentCustomerList[index].Address;
             edittingPopup.Visible = true;
         }
-
         private void guna2Button2_Click(object sender, EventArgs e)
         {
             edittingPopup.Visible = false;
         }
-
         private void edittingSaveButton_Click(object sender, EventArgs e)
         {
             int index = listBoxCustomer.SelectedIndex;
@@ -232,7 +227,6 @@ namespace ASM_1618_Mark3
             edittingPopup.Visible = false;
             MessageBox.Show("Done!");
         }
-
         private void guna2ImageButton1_Click(object sender, EventArgs e)
         {
             Room.UpdateRoomList(currentCustomerList[listBoxCustomer.SelectedIndex].room.Type, currentCustomerList[listBoxCustomer.SelectedIndex].room.RoomNumber);
@@ -249,7 +243,6 @@ namespace ASM_1618_Mark3
             edittingPopup.Visible = false;
             MessageBox.Show("Done!");
         }
-
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -259,17 +252,40 @@ namespace ASM_1618_Mark3
         {
             allCustmerPanel.Visible = false;
             changePasswordPanel.Visible = true;
+            roomPanel.Visible = false;
         }
-
         private void changePwdActionBtn_Click(object sender, EventArgs e)
         {
             App.ChangePassword(currentPasswordInput.Text, newPasswordInput.Text, repeatNewPasswordInput.Text);
             changePasswordPanel.Visible = false;
         }
-
         private void viewEmptyRoomBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Sorry, this function is in development now!");
+            string roomAvaiable = "";
+            List<string> roomTypes = Room.RoomTypes();
+            roomTypes.ForEach(type =>
+            {
+                int count = 0;
+                List<int> roomLeft = Room.FindAvailableRoom(type);
+                string tempRow = type+": ";
+                roomLeft.ForEach(element =>
+                {
+                    tempRow += $"Room {element} ";
+                    count++;
+                });
+                if (count == 0)
+                {
+                    tempRow += "none";
+                }
+                roomAvaiable += tempRow + "; ";
+            });
+            roomPanel.Visible = true;
+            roomLabel.Text = roomAvaiable;
+        }
+
+        private void guna2GradientPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

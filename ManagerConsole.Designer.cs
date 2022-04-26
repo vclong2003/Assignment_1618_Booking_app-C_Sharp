@@ -83,6 +83,8 @@
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.backButton = new Guna.UI2.WinForms.Guna2Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.roomPanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.roomLabel = new Guna.UI.WinForms.GunaLabel();
             this.guna2GradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.guna2Panel1.SuspendLayout();
@@ -90,10 +92,12 @@
             this.edittingPopup.SuspendLayout();
             this.searchPopup.SuspendLayout();
             this.changePasswordPanel.SuspendLayout();
+            this.roomPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // guna2GradientPanel1
             // 
+            this.guna2GradientPanel1.Controls.Add(this.roomPanel);
             this.guna2GradientPanel1.Controls.Add(this.guna2PictureBox1);
             this.guna2GradientPanel1.Controls.Add(this.changePwdBtn);
             this.guna2GradientPanel1.Controls.Add(this.editBtn);
@@ -112,6 +116,7 @@
             this.guna2GradientPanel1.ShadowDecoration.Parent = this.guna2GradientPanel1;
             this.guna2GradientPanel1.Size = new System.Drawing.Size(1165, 613);
             this.guna2GradientPanel1.TabIndex = 2;
+            this.guna2GradientPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2GradientPanel1_Paint);
             // 
             // guna2PictureBox1
             // 
@@ -922,6 +927,29 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // roomPanel
+            // 
+            this.roomPanel.BackColor = System.Drawing.Color.Transparent;
+            this.roomPanel.BorderRadius = 25;
+            this.roomPanel.Controls.Add(this.roomLabel);
+            this.roomPanel.FillColor = System.Drawing.Color.White;
+            this.roomPanel.Location = new System.Drawing.Point(228, 26);
+            this.roomPanel.Name = "roomPanel";
+            this.roomPanel.ShadowDecoration.Parent = this.roomPanel;
+            this.roomPanel.Size = new System.Drawing.Size(925, 525);
+            this.roomPanel.TabIndex = 1;
+            this.roomPanel.Visible = false;
+            // 
+            // roomLabel
+            // 
+            this.roomLabel.AutoSize = true;
+            this.roomLabel.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.roomLabel.Location = new System.Drawing.Point(186, 163);
+            this.roomLabel.Name = "roomLabel";
+            this.roomLabel.Size = new System.Drawing.Size(81, 20);
+            this.roomLabel.TabIndex = 0;
+            this.roomLabel.Text = "roomLabel";
+            // 
             // ManagerConsole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -943,6 +971,8 @@
             this.edittingPopup.PerformLayout();
             this.searchPopup.ResumeLayout(false);
             this.changePasswordPanel.ResumeLayout(false);
+            this.roomPanel.ResumeLayout(false);
+            this.roomPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1002,5 +1032,7 @@
         private Guna.UI2.WinForms.Guna2TextBox currentPasswordInput;
         private Guna.UI2.WinForms.Guna2Button changePwdActionBtn;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
+        private Guna.UI2.WinForms.Guna2Panel roomPanel;
+        private Guna.UI.WinForms.GunaLabel roomLabel;
     }
 }

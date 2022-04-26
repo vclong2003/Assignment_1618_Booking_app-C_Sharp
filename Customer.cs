@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ASM_1618_Mark3
 {
@@ -13,7 +9,6 @@ namespace ASM_1618_Mark3
         public string PhoneNumber { get; set; }
         public string Age { get; set; }
         public string Address { get; set; }
-
         public int Duration { get; set; }
         public int TotalBill { get; set; }
         public Room room;
@@ -29,3 +24,4 @@ namespace ASM_1618_Mark3
         }
     }
 }
+

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 namespace ASM_1618_Mark3
 {
@@ -21,7 +19,6 @@ namespace ASM_1618_Mark3
             {"Deluxe", 1500 },
             {"Family Suite", 2000 }
         };
-        public static string test = "success!";
         public string Type { get; set; }
         public int RoomNumber { get; set; }
         public int PricePerNight { get; set; }
